@@ -19,10 +19,7 @@ const Article = () => {
             {({ data: { clients } }) => {
                 if (clients.data.length) {
                     ReactGA.pageview('/' + clients.data[0].attributes.slug);
-                    const logoUrl =
-                        process.env.NODE_ENV !== "development"
-                            ? clients.data[0].attributes.logo.data.attributes.url
-                            : process.env.REACT_APP_BACKEND_URL +
+                    const logoUrl = process.env.REACT_APP_BACKEND_URL +
                             clients.data[0].attributes.logo.data.attributes.url;
                     const cards  = clients.data[0].attributes.indispensables.data
 
