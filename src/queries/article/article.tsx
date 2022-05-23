@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from "graphql-tag"
 
 const ARTICLE_QUERY = gql`
     query Client($slug: String!) {
@@ -9,6 +9,14 @@ const ARTICLE_QUERY = gql`
                     company_name
                     color
                     slug
+                    background_image {
+                        data {
+                            attributes {
+                                alternativeText
+                                url
+                            }
+                        }
+                    }
                     logo {
                         data {
                             attributes {
@@ -17,28 +25,29 @@ const ARTICLE_QUERY = gql`
                             }
                         }
                     }
-                    indispensables {
-                        data {
-                            attributes {
-                                description
-                                title
-                                isEnabled
-                                link
-                                background {
-                                    data {
-                                        attributes {
-                                            url
-                                        }
-                                    }
+                    Indispensables {
+                        description
+                        title
+                        link
+                        background {
+                            data {
+                                attributes {
+                                    url
+                                }
+                            }
+                        }
+                        logo {
+                            data {
+                                attributes {
+                                    url
                                 }
                             }
                         }
                     }
-                    
                 }
             }
         }
     }
-`;
+`
 
-export default ARTICLE_QUERY;
+export default ARTICLE_QUERY

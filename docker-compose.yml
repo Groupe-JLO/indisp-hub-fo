@@ -1,0 +1,20 @@
+version: "3"
+services:
+  client:
+    image: node:12
+    working_dir: /home/node/app
+    user: "node"
+    environment:
+      NODE_ENV: development
+      HOSTNAMES: .${CLIENT_HOSTNAME}
+      SSH_AUTH_SOCK: ${SSH_AUTH_SOCK}
+      NPM_AUTH_TOKEN: ${NPM_AUTH_TOKEN}
+      BACKEND_ENDPOINT: ${REACT_APP_BACKEND_HOST}
+    volumes:
+      - ./:/home/node/app/
+      - ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK}:ro
+      - ~/.ssh:/home/node/.ssh:ro
+      - ./container-setup/npm-start.sh:/npm-start.sh
+    stdin_open: true
+    command: /npm-start.sh $IN_DOCKER
+    hostname: hpi.${CLIENT_HOSTNAME}

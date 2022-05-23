@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  https:
+    image: nginx:latest
+    hostname: ${CLIENT_HOSTNAME}
+    environment:
+      - VIRTUAL_HOST=${CLIENT_HOSTNAME}
+      - VIRTUAL_PORT=80
+      - HOSTNAMES=${CLIENT_HOSTNAME}
+      - LETSENCRYPT_HOST=${CLIENT_HOSTNAME}
+      - LETSENCRYPT_EMAIL=developers@groupe-jlo.com
+    volumes:
+      - ${APP_PATH}:/var/www/html
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - proxy
+      - default
+
+networks:
+  proxy:
+    external:
+      name: nginx-proxy

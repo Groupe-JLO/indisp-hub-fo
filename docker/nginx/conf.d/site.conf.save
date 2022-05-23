@@ -1,0 +1,45 @@
+upstream fastcgi_backend {
+    server php:9000;
+}
+
+server {
+    listen 80;
+    index index.php;
+
+    
+server_name accenture.groupe-jlo.com;
+    if ($http_x_forwarded_proto = "http") {    
+	return 301 https://accenture.groupe-jlo.com$request_uri;
+    }    
+    set $base /var/www/html;
+    root $base;
+
+    error_log  /var/log/nginx/error.log;
+    access_log /var/log/nginx/access.log;
+
+    location / {
+        try_files $uri $uri/ /index.html =404;
+    }
+
+
+
+    location ~ \.php$ {
+        include        fastcgi_params;
+
+        fastcgi_pass   fastcgi_backend;
+        fastcgi_index					index.php;
+        fastcgi_split_path_info			^(.+\.php)(/.+)$;
+
+        fastcgi_param DOCUMENT_ROOT		$realpath_root;
+        fastcgi_param SCRIPT_FILENAME	$realpath_root$fastcgi_script_name;
+        fastcgi_param PHP_ADMIN_VALUE	"open_basedir=$base/:/usr/lib/php/:/tmp/";
+
+        fastcgi_intercept_errors		off;
+        fastcgi_buffer_size				128k;
+        fastcgi_buffers					256 16k;
+        fastcgi_busy_buffers_size		256k;
+        fastcgi_temp_file_write_size	256k;
+    }
+}
+
+
