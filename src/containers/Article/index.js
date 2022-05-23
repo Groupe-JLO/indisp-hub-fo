@@ -42,15 +42,9 @@ const Article = () => {
                                 <Styles.Layout>
                                     <Styles.CardsContainer>
                                         {cards.map((card) => {
-                                            const imageUrl =
-                                                process.env.NODE_ENV !== "development"
-                                                    ? card.background.data[0].attributes.url
-                                                    : process.env.REACT_APP_BACKEND_URL +
+                                            const imageUrl = process.env.REACT_APP_BACKEND_URL +
                                                     card.background.data[0].attributes.url
-                                            const logoUrl =
-                                                process.env.NODE_ENV !== "development"
-                                                    ? card.logo.data.attributes.url
-                                                    : process.env.REACT_APP_BACKEND_URL +
+                                            const logoUrl = process.env.REACT_APP_BACKEND_URL +
                                                     card.logo.data.attributes.url
                                             return (
                                                 <Styles.CardContainer key={clients.data[0].attributes.slug}
