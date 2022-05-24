@@ -5,6 +5,7 @@ import {useParams} from "react-router";
 import Query from "../../components/Query";
 
 import * as Styles from "./styles"
+import indispLogo from "../../assets/indisp_logo.png"
 
 import ARTICLE_QUERY from "../../queries/article/article";
 
@@ -33,7 +34,8 @@ const Article = () => {
                         <>
                             <Styles.Header>
                                 <Styles.HeadingContainer>
-                                    <h1>Les indispensables</h1>
+                                    <img alt="Logo"
+                                         src={indispLogo}/>
                                     <img alt={clients.data[0].attributes.logo.data.attributes.alternativeText}
                                          src={logoUrl}/>
                                 </Styles.HeadingContainer>
