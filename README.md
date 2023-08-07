@@ -10,3 +10,6 @@ Please consider refactoring this repository (and indisp-hub_bo) as they are not 
 
 Indispensable front-end is hosted on the HPI VPS from OVH, Running in an Nginx container. For more informations to acces this VPS, please contact the developers team
 
+## Continous integration
+
+No CI is setup on this repository, you have to update the repo manually on the VPS.
